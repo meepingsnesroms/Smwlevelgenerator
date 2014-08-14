@@ -1,0 +1,47 @@
+PYTHON SCRIPTS
+The level generator uses python scripts to write to the level.
+4 functions exist to interface with the level.
+placestr(xcoordinate,ycoordinate,nameofstructuretoplace'usualy the same as the script name')
+setlvldata(xcoordinate,ycoordinate,value'map16 number,spritenumber',(1=map'should be 0xFF',2 map16 number,3 sprite))
+getlvldata(xcoordinate,ycoordinate)
+placesprite(xcoordinate,ycoordinate,spritenumber)
+
+getlvldata returns int array[3](array is 0 based) 0=infinite mario bros data(usually only useful to check if block is empty/equals 0)
+,1=map16 data(what you generally want along with whether array[0]!=0),2=infinite mario bros sprite-data,3=smw sprite data if imb sprite data equals 10
+
+placestr the name dosent include the .ums extension (it will open a file named (nameofstructure).ums)
+a file named (nameofstructure).ums (the file containing the structure map16 data)should come with your script.
+
+setlvldata the values that can be set are 1=(infinite mario bros level data(useless to use/just set to 0xFF if theres a block you place so my program will set the map16 data)),2=(map16 number),3=(deprecated sprite-data function use placesprite instead)
+
+placesprite self-explanatory
+
+Always include 
+
+from gen import make
+lvltools = make()
+
+at the top of your script or else you cant access the the level functions.
+
+Prefix all level functions with lvltools.(eg lvltools.getlvldata(20,20)).
+
+
+
+
+
+STRUCTURE MAKER
+WARNING:You must make your structure out of map16 blocks not objects else you will have a block that equals null=0=0x0000=map16 page 0 block 0=water.
+Make a .mwl file that is completely empty,then start building your structure at 0,0 in the mwl (if you build it else where thats where the structure will start(eg place it at 20,20 then when placed in a level it will start 20 blocks away from the start point))
+Now run structure builder with the mwl in the same folder type the full file name including .mwl now click Extract structure/make .ums
+You now have a .ums file now you just need your script.
+
+
+
+
+
+SMW LEVEL BUILDER
+Make sure that foundation.mwl(foundation.mwl is not a valid level if you open it,it will look corrupt but it is not) is in the same folder.
+List the scripts in the order you want them to run(first one you type the first one that runs) dont add the .py extention.
+Push Go.
+When you get the Level Done message there is now a file named level.mwl that is a valid level.(assuming your scripts are valid)
+
